@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1035736285524-r4efu2e2ldueogh7ass57kpmi6pf3jla.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1035736285524-r4efu2e2ldueogh7ass57kpmi6pf3jla</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD-aWfESh0JCPByg8uZQ5-H60b8aO3zj0k</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1035736285524</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>closer.closercafe</string>
+	<key>PROJECT_ID</key>
+	<string>closercafe-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>closercafe-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1035736285524:ios:0568ca6e5ca961c569c8c1</string>
+	<key>DATABASE_URL</key>
+	<string>https://closercafe-app.firebaseio.com</string>
+</dict>
+</plist>
