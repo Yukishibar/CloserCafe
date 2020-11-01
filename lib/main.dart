@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
                 ),
                 child: Text(
-                  "メニューを見る",
+                  "メニューを見るaa",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
