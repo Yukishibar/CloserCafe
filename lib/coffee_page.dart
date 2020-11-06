@@ -215,69 +215,71 @@ class CoffeeSelect extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       child: imageList[index],
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                margin: const EdgeInsets.only(top: 15.0),
-                                //商品名のテキスト編集
-                                child: Text(
-                                  name[index],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                //価格のテキスト編集
-                                child: Text(
-                                  price[index],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              RaisedButton(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 5.0, bottom: 5.0, right: 3.0, left: 3.0
-                                  ),
-                                  child: Text(
-                                    "Order",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                    Flexible(
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 15.0),
+                                    //商品名のテキスト編集
+                                    child: Text(
+                                      name[index],
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                color: Colors.orange[400],
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Coffee1()
+                                  Container(
+                                    //価格のテキスト編集
+                                    child: Text(
+                                      price[index],
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
                                     ),
-                                  );
-                                },
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  RaisedButton(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 5.0, bottom: 5.0, right: 3.0, left: 3.0
+                                      ),
+                                      child: Text(
+                                        "Order",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    color: Colors.orange[400],
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Coffee1()
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
                     ),
                   ],
                 )

@@ -116,7 +116,8 @@ class CheckoutMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              Image.asset('images/QR1.jpg'),
+
+              Flexible(child: Image.asset('images/QR1.jpg')),
               RaisedButton(
                 child: Padding(
                   padding: EdgeInsets.only(

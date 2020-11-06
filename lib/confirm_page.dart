@@ -27,12 +27,8 @@ class Confirm extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 20.0, bottom: 20.0, right: 230.0, left: 230.0
-                  ),
-                  child: Text(
+              Flexible(child: Container(
+                child: Text(
                     'ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。',
                     style: TextStyle(
                       fontSize: 25,

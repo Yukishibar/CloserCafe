@@ -1,6 +1,38 @@
 import 'package:closercafe/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(Coffee1Main());
+}
+
+class Coffee1Main extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+
+        // エラー時に表示するWidget
+        if (snapshot.hasError) {
+          return Container(color: Colors.white);
+        }
+
+        // Firebaseのinitialize完了したら表示したいWidget
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Coffee1();
+        }
+
+        // Firebaseのinitializeが完了するのを待つ間に表示するWidget
+        return Container(color: Colors.red);
+      },
+    );
+  }
+}
 
 
 class Coffee1 extends StatelessWidget {
@@ -101,13 +133,72 @@ class Coffee1 extends StatelessWidget {
                             builder: (context) => CheckoutMenu()
                         ),
                       );
-                    },
+                    }, 
                   ),
+
+                  AddUser("0002","540","0"),
+
+                  //おそらくこれはFirebaseからの情報を表示させる機能
+                  //GetUserName("coffee",),
+
                 ],
               ),
             ],
           ),
         )
+    );
+  }
+}
+
+class AddUser extends StatelessWidget {
+  final String ordernum;
+  final String price;
+  final String status;
+  AddUser(this.ordernum, this.price, this.status);
+  @override
+  Widget build(BuildContext context) {
+    // Create a CollectionReference called users that references the firestore collection
+    CollectionReference product = FirebaseFirestore.instance.collection('product');
+    Future<void> addUser() {
+      // Call the user's CollectionReference to add a new user
+      return product
+          .add({
+        'ordernum': ordernum,
+        'price': price,
+        'status': status
+      })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+    }
+    return FlatButton(
+      color:Colors.yellow,
+      onPressed: addUser,
+      child: Text(
+        "Add User",
+      ),
+    );
+  }
+}
+
+class GetUserName extends StatelessWidget {
+  final String documentId;
+  GetUserName(this.documentId);
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference product = FirebaseFirestore.instance.collection('product');
+    return FutureBuilder<DocumentSnapshot>(
+      future: product.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          return Text("Full Name: ${data['order_num']} ${data['status']}");
+        }
+        return Text("loading");
+      },
     );
   }
 }
