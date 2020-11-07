@@ -148,7 +148,7 @@ class Coffee1 extends StatelessWidget {
 
 
 //データ送信ボタンを無くしてお会計ボタンを押したらFirebaseにデータが送信されるようにする
-//confirm_pageを参照すること
+//confirm_pageを参照すること！
 
 
 
