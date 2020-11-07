@@ -157,15 +157,14 @@ class AddInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference product =firestore.collection("product");
+    CollectionReference product = firestore.collection("product");
 
-    Future<void> addInfo() {
-      return product
-          .add({  //.addは単純にドキュメントを追加する
-            "ordernum" : ordernum,
-            "price" : price,
-            "status" : status,
-          })
+    Future<void> addInfo() async{
+      return await product.doc("coffee2").set({
+        "ordernum" : ordernum,
+        "price" : price,
+        "status" : status,
+      })
           .then((value) => print("Order Information Added"))
           .catchError((error) => print("Failed to add information: $error"));
     }

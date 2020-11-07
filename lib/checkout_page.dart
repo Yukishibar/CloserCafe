@@ -90,7 +90,7 @@ class CheckoutMenu extends StatelessWidget {
                 ),
               ),
 
-              GetProductName("uDUEGsk36o9mYWxDg4KQ"),
+              GetProductName("coffee"),
 
               Flexible(child: Image.asset('images/QR1.jpg')),
               RaisedButton(
@@ -126,6 +126,14 @@ class CheckoutMenu extends StatelessWidget {
     );
   }
 }
+
+
+//データ送信ボタンを無くしてお会計ボタンを押したらFirebaseにデータが送信されるようにする
+//confirm_pageを参照すること
+
+
+
+
 
 
 //Firebase上のデータを取得する

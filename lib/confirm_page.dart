@@ -1,6 +1,7 @@
 import 'package:closercafe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Confirm extends StatelessWidget {
   @override
@@ -58,6 +59,11 @@ class Confirm extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 onPressed: () {
+                  Map<String, dynamic> updateData = {
+                    'status': '1',
+                  };
+                  FirebaseFirestore.instance.collection("product")
+                      .doc("coffee2").update(updateData);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -72,3 +78,6 @@ class Confirm extends StatelessWidget {
     );
   }
 }
+
+
+//statusを0→1に変更する処理
