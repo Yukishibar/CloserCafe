@@ -1,4 +1,3 @@
-import 'package:closercafe/checkout_page.dart';
 import 'package:closercafe/coffee1.dart';
 import 'package:closercafe/custom_page.dart';
 import 'package:closercafe/lemonade_page.dart';
@@ -40,8 +39,6 @@ class CoffeeMenu extends StatelessWidget {
               Flexible(
                   child: CoffeeSelect()
               ),
-              //お会計ボタン
-              _paycheckBotton(context),
             ]
         ),
       ),
@@ -123,43 +120,6 @@ class CoffeeMenu extends StatelessWidget {
             ),
           ]
       ),
-    );
-  }
-
-  //お会計ボタン
-  Widget _paycheckBotton(BuildContext context){
-    return  Container(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
-                ),
-                child: Text(
-                  'お会計',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              color: Colors.cyan[600],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CheckoutMenu()
-                  ),
-                );
-              },
-            ),
-          ],
-        )
     );
   }
 }

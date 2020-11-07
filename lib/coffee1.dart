@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   runApp(Coffee1Main());
 }
 
@@ -107,6 +106,9 @@ class Coffee1 extends StatelessWidget {
                     ),
                   ),
 
+                  //アプリが支払いが終わったら次の番号をセットしたい
+                  AddInfo("1234567890","540","0"),
+
                   //お会計ボタン
                   RaisedButton(
                     child: Padding(
@@ -133,14 +135,8 @@ class Coffee1 extends StatelessWidget {
                             builder: (context) => CheckoutMenu()
                         ),
                       );
-                    }, 
+                    },
                   ),
-
-                  AddUser("0002","540","0"),
-
-                  //おそらくこれはFirebaseからの情報を表示させる機能
-                  //GetUserName("coffee",),
-
                 ],
               ),
             ],
@@ -150,55 +146,49 @@ class Coffee1 extends StatelessWidget {
   }
 }
 
-class AddUser extends StatelessWidget {
+//Firebaseにデータを追加する
+class AddInfo extends StatelessWidget {
   final String ordernum;
   final String price;
   final String status;
-  AddUser(this.ordernum, this.price, this.status);
-  @override
-  Widget build(BuildContext context) {
-    // Create a CollectionReference called users that references the firestore collection
-    CollectionReference product = FirebaseFirestore.instance.collection('product');
-    Future<void> addUser() {
-      // Call the user's CollectionReference to add a new user
-      return product
-          .add({
-        'ordernum': ordernum,
-        'price': price,
-        'status': status
-      })
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
-    }
-    return FlatButton(
-      color:Colors.yellow,
-      onPressed: addUser,
-      child: Text(
-        "Add User",
-      ),
-    );
-  }
-}
 
-class GetUserName extends StatelessWidget {
-  final String documentId;
-  GetUserName(this.documentId);
+  AddInfo(this.ordernum, this.price, this.status);
+
   @override
   Widget build(BuildContext context) {
-    CollectionReference product = FirebaseFirestore.instance.collection('product');
-    return FutureBuilder<DocumentSnapshot>(
-      future: product.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          return Text("Full Name: ${data['order_num']} ${data['status']}");
-        }
-        return Text("loading");
-      },
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference product =firestore.collection("product");
+
+    Future<void> addInfo() {
+      return product
+          .add({  //.addは単純にドキュメントを追加する
+            "ordernum" : ordernum,
+            "price" : price,
+            "status" : status,
+          })
+          .then((value) => print("Order Information Added"))
+          .catchError((error) => print("Failed to add information: $error"));
+    }
+
+    //データ送信ボタン
+    return RaisedButton(
+      child: Padding(
+        padding: EdgeInsets.only(
+            top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
+        ),
+        child: Text(
+          "データ送信",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      color:Colors.orangeAccent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      onPressed: addInfo,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:closercafe/confirm_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CheckoutMenu extends StatelessWidget {
   @override
@@ -88,34 +89,8 @@ class CheckoutMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 10.0, bottom: 10.0, right: 120.0, left: 120.0
-                  ),
-                  child: Text(
-                    "大谷おすすめのコーヒー　　×1   500円",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 10.0, bottom: 10.0, right: 120.0, left: 120.0
-                  ),
-                  child: Text(
-                    "俺のコーヒー　　×2   1000円",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
+
+              GetProductName("uDUEGsk36o9mYWxDg4KQ"),
 
               Flexible(child: Image.asset('images/QR1.jpg')),
               RaisedButton(
@@ -148,6 +123,42 @@ class CheckoutMenu extends StatelessWidget {
             ],
           ),
         )
+    );
+  }
+}
+
+
+//Firebase上のデータを取得する
+class GetProductName extends StatelessWidget {
+  final String documentId;
+
+  GetProductName(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference product = FirebaseFirestore.instance.collection('product');
+    return FutureBuilder<DocumentSnapshot>(
+      future: product.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          return Text(
+              "樋口おすすめのコーヒー \n"
+                  "オーダー番号 : ${data['ordernum']} "
+                  "金額 : ${data['price']}円 "
+                  "状態 : ${data['status']}",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          );
+        }
+        return Text("loading");
+      },
     );
   }
 }
