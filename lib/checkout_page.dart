@@ -127,15 +127,6 @@ class CheckoutMenu extends StatelessWidget {
   }
 }
 
-
-//データ送信ボタンを無くしてお会計ボタンを押したらFirebaseにデータが送信されるようにする
-//confirm_pageを参照すること
-
-
-
-
-
-
 //Firebase上のデータを取得する
 class GetProductName extends StatelessWidget {
   final String documentId;
