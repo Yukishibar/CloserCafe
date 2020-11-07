@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:closercafe/logo.dart';
 
-//Statelessはアプリが動作途中でもウィジェットが変化しない
 class CoffeeMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

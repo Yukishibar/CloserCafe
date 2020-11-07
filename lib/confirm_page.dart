@@ -78,6 +78,3 @@ class Confirm extends StatelessWidget {
     );
   }
 }
-
-
-//statusを0→1に変更する処理

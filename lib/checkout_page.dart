@@ -127,7 +127,7 @@ class CheckoutMenu extends StatelessWidget {
   }
 }
 
-//Firebase上のデータを取得する
+//Firebase上のデータを取得する!
 class GetProductName extends StatelessWidget {
   final String documentId;
 
