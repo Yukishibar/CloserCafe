@@ -16,20 +16,21 @@ class Confirm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'images/CloserCafe.png',
+                "images/CloserCafe.png",
                 fit: BoxFit.contain,
                 height: 45,
               ),
             ],
           ),
         ),
-        body: Container(
-          margin: const EdgeInsets.all(30.0),
+        body: Center(
+          //margin: const EdgeInsets.all(30.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Flexible(child: Container(
-                child: Text(
+              Flexible(
+                child: Container(
+                  child: Text(
                     'ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。',
                     style: TextStyle(
                       fontSize: 25,
@@ -39,7 +40,9 @@ class Confirm extends StatelessWidget {
                   ),
                 ),
               ),
-              Image.asset('images/confirm.jpg'),
+
+              GetProductName("coffee2"),
+
               RaisedButton(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -75,6 +78,69 @@ class Confirm extends StatelessWidget {
             ],
           ),
         )
+    );
+  }
+}
+
+
+//Firebase上のデータを取得する
+class GetProductName extends StatelessWidget {
+  final String documentId;
+
+  GetProductName(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference product = FirebaseFirestore.instance.collection('product');
+    return FutureBuilder<DocumentSnapshot>(
+      future: product.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          return Container(
+            margin: const EdgeInsets.all(30.0),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 20.0, bottom: 20.0, right: 200.0, left: 200.0
+              ),
+              child: Column(
+                children: <Widget> [
+                  Text(
+                    "ご注文詳細 \n",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "オーダー番号 : ${data['ordernum']} ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "商品名 : 樋口おすすめのコーヒー \n"
+                        "金額 : ${data['price']}円 "
+                        "状態 : ${data['status']}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            color: Colors.grey[200],
+          );
+        }
+        return Text("loading");
+      },
     );
   }
 }

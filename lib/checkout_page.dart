@@ -90,7 +90,8 @@ class CheckoutMenu extends StatelessWidget {
                 ),
               ),
 
-              GetProductName("coffee"),
+
+              AddInfo("1234567890","540","0"),
 
               Flexible(child: Image.asset('images/QR1.jpg')),
               RaisedButton(
@@ -127,37 +128,49 @@ class CheckoutMenu extends StatelessWidget {
   }
 }
 
-//Firebase上のデータを取得する!
-class GetProductName extends StatelessWidget {
-  final String documentId;
 
-  GetProductName(this.documentId);
+//Firebaseにデータを追加する
+class AddInfo extends StatelessWidget {
+  final String ordernum;
+  final String price;
+  final String status;
+
+  AddInfo(this.ordernum, this.price, this.status);
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference product = FirebaseFirestore.instance.collection('product');
-    return FutureBuilder<DocumentSnapshot>(
-      future: product.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          return Text(
-              "樋口おすすめのコーヒー \n"
-                  "オーダー番号 : ${data['ordernum']} "
-                  "金額 : ${data['price']}円 "
-                  "状態 : ${data['status']}",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-            ),
-          );
-        }
-        return Text("loading");
-      },
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference product = firestore.collection("product");
+
+    Future<void> addInfo() async{
+      return await product.doc("coffee2").set({
+        "ordernum" : ordernum,
+        "price" : price,
+        "status" : status,
+      })
+          .then((value) => print("Order Information Added"))
+          .catchError((error) => print("Failed to add information: $error"));
+    }
+
+    //データ送信ボタン
+    return RaisedButton(
+      child: Padding(
+        padding: EdgeInsets.only(
+            top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
+        ),
+        child: Text(
+          "注文確定",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      color:Colors.orangeAccent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      onPressed: addInfo,
     );
   }
 }
