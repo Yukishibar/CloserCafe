@@ -91,7 +91,7 @@ class CheckoutMenu extends StatelessWidget {
               ),
 
 
-              AddInfo("1234567890","540","0"),
+              AddInfo("0000001","540","0"),
 
               Flexible(child: Image.asset('images/QR1.jpg')),
               RaisedButton(
@@ -143,7 +143,7 @@ class AddInfo extends StatelessWidget {
     CollectionReference product = firestore.collection("product");
 
     Future<void> addInfo() async{
-      return await product.doc("coffee2").set({
+      return await product.doc("coffee4").set({
         "ordernum" : ordernum,
         "price" : price,
         "status" : status,

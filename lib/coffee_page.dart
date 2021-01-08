@@ -1,9 +1,12 @@
-import 'package:closercafe/coffee1.dart';
-import 'package:closercafe/custom_page.dart';
-import 'package:closercafe/lemonade_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:closercafe/logo.dart';
+import 'package:closercafe/cafelatte.dart';
+import 'package:closercafe/premiumcoffee.dart';
+import 'package:closercafe/lattemacchiato.dart';
+import 'package:closercafe/custom_page.dart';
+import 'package:closercafe/lemonade_page.dart';
 
 class CoffeeMenu extends StatelessWidget {
   @override
@@ -28,7 +31,7 @@ class CoffeeMenu extends StatelessWidget {
         ),
       ),
       body: Container(
-        margin: const EdgeInsets.all(30.0),
+        margin: const EdgeInsets.fromLTRB(30, 20, 30, 0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -37,6 +40,43 @@ class CoffeeMenu extends StatelessWidget {
               //リストビュー
               Flexible(
                   child: CoffeeSelect()
+              ),
+
+              //フッター表示
+              Scrollbar(
+                isAlwaysShown: false,
+                child: SingleChildScrollView(
+                  child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            //黒フチで囲うどうか
+                            border: Border.all(color: Colors.black),
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                spreadRadius: 10.0,
+                                blurRadius: 10.0,
+                                offset: Offset(15, 15),
+                              )
+                            ]
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.pink,
+                                size: 35.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]
+                  ),
+                ),
               ),
             ]
         ),
@@ -128,34 +168,34 @@ class CoffeeSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     //商品の写真
     var imageList = [
-      _imageItem("coffee1"), _imageItem("coffee2"), _imageItem("coffee3"),
-      _imageItem("coffee4"), _imageItem("coffee5"), _imageItem("coffee6"),
-      _imageItem("coffee7"), _imageItem("coffee8"), _imageItem("coffee9"),
+      _imageItem("cafelatte"), _imageItem("premiumcoffee"), _imageItem("lattemacchiato"),
     ];
 
     //商品名
     List<String> name = [
-      "コーヒー1", "コーヒー2", "コーヒー3",
-      "コーヒー4", "コーヒー5", "コーヒー6",
-      "コーヒー7", "コーヒー8", "コーヒー9",
+      "カフェラテ", "プレミアムコーヒー", "ラテマキアート",
     ];
 
     //金額
     List<String> price = [
-      "100円", "200円", "430円",
-      "210円", "310円", "920円",
-      "280円", "540円", "820円",
+      "300円", "360円", "320円",
     ];
+
+    //各注文ページへの遷移
+    var page = [
+      cafelatte(), premiumcoffee(), lattemacchiato(),
+    ];
+
     return Scaffold(
       body: Container(
         child: GridView.count(
-          crossAxisCount: 3,  //横方向に並べる数
+          crossAxisCount: 2,  //横方向に並べる数
           crossAxisSpacing: 15.0, // 縦
           mainAxisSpacing: 10.0, // 横
           childAspectRatio: 0.8, // 高さ
 
           //グリッドのリストに表示させる情報
-          children: List.generate(9, (index) {
+          children: List.generate(3, (index) {
             return Container(
                 alignment: Alignment.center,
                 //ボックスの装飾
@@ -187,7 +227,7 @@ class CoffeeSelect extends StatelessWidget {
                                     child: Text(
                                       name[index],
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -198,7 +238,7 @@ class CoffeeSelect extends StatelessWidget {
                                     child: Text(
                                       price[index],
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -229,7 +269,7 @@ class CoffeeSelect extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Coffee1()
+                                            builder: (context) => page[index]
                                         ),
                                       );
                                     },
@@ -251,7 +291,7 @@ class CoffeeSelect extends StatelessWidget {
 
   //商品写真のURL処理
   Widget _imageItem(String name) {
-    var image = "images/" + name + ".jpg";
+    var image = "images/" + name + ".png";
     return Container(
       child: Image.asset(image, fit: BoxFit.cover,),
     );

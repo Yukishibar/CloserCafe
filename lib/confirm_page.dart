@@ -41,7 +41,7 @@ class Confirm extends StatelessWidget {
                 ),
               ),
 
-              GetProductName("coffee2"),
+              GetProductName("coffee4"),
 
               RaisedButton(
                 child: Padding(
@@ -66,7 +66,7 @@ class Confirm extends StatelessWidget {
                     'status': '1',
                   };
                   FirebaseFirestore.instance.collection("product")
-                      .doc("coffee2").update(updateData);
+                      .doc("coffee4").update(updateData);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
