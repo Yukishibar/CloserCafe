@@ -18,7 +18,7 @@ class CustomMenu extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CheckoutMenu()
+                        builder: (context) => Checkout()
                     ),
                   );
                 },

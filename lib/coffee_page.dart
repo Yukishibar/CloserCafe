@@ -7,6 +7,7 @@ import 'package:closercafe/premiumcoffee.dart';
 import 'package:closercafe/lattemacchiato.dart';
 import 'package:closercafe/custom_page.dart';
 import 'package:closercafe/lemonade_page.dart';
+import 'package:closercafe/checkout_page.dart';
 
 class CoffeeMenu extends StatelessWidget {
   @override
@@ -41,43 +42,8 @@ class CoffeeMenu extends StatelessWidget {
               Flexible(
                   child: CoffeeSelect()
               ),
-
               //フッター表示
-              Scrollbar(
-                isAlwaysShown: false,
-                child: SingleChildScrollView(
-                  child: Column(
-                      children: <Widget>[
-                        Container(
-                          height: 80,
-                          decoration: BoxDecoration(
-                            //黒フチで囲うどうか
-                            border: Border.all(color: Colors.black),
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                spreadRadius: 10.0,
-                                blurRadius: 10.0,
-                                offset: Offset(15, 15),
-                              )
-                            ]
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.pink,
-                                size: 35.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]
-                  ),
-                ),
-              ),
+              _fotter(context),
             ]
         ),
       ),
@@ -158,6 +124,69 @@ class CoffeeMenu extends StatelessWidget {
               },
             ),
           ]
+      ),
+    );
+  }
+
+  //フッター
+  Widget _fotter(BuildContext context){
+    return Scrollbar(
+      isAlwaysShown: false,
+      child: SingleChildScrollView(
+        child: Column(
+            children: <Widget>[
+              Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  //黒フチで囲うどうか
+                    //border: Border.all(color: Colors.black),
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        spreadRadius: 10.0,
+                        blurRadius: 10.0,
+                        offset: Offset(15, 15),
+                      )
+                    ]
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.shopping_cart_sharp,
+                      color: Colors.pink,
+                      size: 35.0,
+                    ),
+                    RaisedButton(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 5.0, bottom: 5.0, right: 3.0, left: 3.0
+                        ),
+                        child: Text(
+                          "注文へ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      color: Colors.orange[400],
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Checkout()
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ]
+        ),
       ),
     );
   }
