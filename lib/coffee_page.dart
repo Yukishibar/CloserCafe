@@ -128,7 +128,6 @@ class CoffeeMenu extends StatelessWidget {
     );
   }
 
-  //フッター
   Widget _fotter(BuildContext context){
     return Scrollbar(
       isAlwaysShown: false,

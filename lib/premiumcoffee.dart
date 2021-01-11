@@ -51,7 +51,7 @@ class premiumcoffee extends StatelessWidget {
                           child: Row(
                               children: [
                                 Text(
-                                  "300円",
+                                  "360円",
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
@@ -87,7 +87,7 @@ class premiumcoffee extends StatelessWidget {
                           top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
                       ),
                       child: Text(
-                        "ご注文内容の確認",
+                        "カートに追加",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

@@ -8,6 +8,10 @@ void main() {
 }
 
 class cafelatte extends StatelessWidget {
+  final String _product = 'カフェラテ';
+  final int  _number = 1;
+  final int  _menu = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +91,7 @@ class cafelatte extends StatelessWidget {
                           top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
                       ),
                       child: Text(
-                        "ご注文内容の確認",
+                        "カートに追加",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -103,7 +107,11 @@ class cafelatte extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Checkout()
+                            builder: (context) => Checkout(
+                              product: _product,
+                              number: _number,
+                              menu: _menu,
+                            ),
                         ),
                       );
                     },
@@ -112,7 +120,7 @@ class cafelatte extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
     );
   }
 }
