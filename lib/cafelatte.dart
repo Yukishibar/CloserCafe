@@ -38,8 +38,9 @@ class cafelatte extends StatelessWidget {
             children: <Widget>[
               Image.asset("images/cafelatte.png"),
               Text(
-                "こちらの商品はCloserCafe代表の樋口翔太おすすめの一杯となっています。\n"
-                    "特にコーヒー豆はアメリカのマンハッタン産のものを贅沢に使用しています。",
+                "厳選したコーヒー豆とフレッシュな味わいのミルクを使い、風味豊かに仕上げました。\n"
+                    "深みのあるエスプレッソの香りと豊かなミルクのコク、"
+                    "ほどよい甘さがバランスよく引き立てあう贅沢な一杯です。",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,

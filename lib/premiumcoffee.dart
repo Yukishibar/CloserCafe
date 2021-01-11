@@ -8,6 +8,10 @@ void main() {
 }
 
 class premiumcoffee extends StatelessWidget {
+  final String _product = 'プレミアムコーヒー';
+  final int  _number = 1;
+  final int  _menu = 2;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +38,8 @@ class premiumcoffee extends StatelessWidget {
             children: <Widget>[
               Image.asset("images/premiumcoffee.png"),
               Text(
-                "こちらの商品はCloserCafe代表の樋口翔太おすすめの一杯となっています。\n"
-                    "特にコーヒー豆はアメリカのマンハッタン産のものを贅沢に使用しています。",
+                "最上級グレード豆を使用したプレミアムコーヒー。\n"
+                    "マイルドな口あたりが特徴で、どなたにも親しんでいただけるコーヒーです。",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -103,7 +107,11 @@ class premiumcoffee extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Checkout()
+                            builder: (context) => Checkout(
+                              product: _product,
+                              number: _number,
+                              menu: _menu,
+                            ),
                         ),
                       );
                     },

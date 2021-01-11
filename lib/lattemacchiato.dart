@@ -8,6 +8,10 @@ void main() {
 }
 
 class lattemacchiato extends StatelessWidget {
+  final String _product = 'ラテマキアート';
+  final int  _number = 1;
+  final int  _menu = 3;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +38,8 @@ class lattemacchiato extends StatelessWidget {
             children: <Widget>[
               Image.asset("images/lattemacchiato.png"),
               Text(
-                "こちらの商品はCloserCafe代表の樋口翔太おすすめの一杯となっています。\n"
-                    "特にコーヒー豆はアメリカのマンハッタン産のものを贅沢に使用しています。",
+                "温かくなめらかなミルクの上に、豊かでまろやかなフォームミルクをたっぷりと注ぎ、"
+                    "上からエスプレッソを静かに落とすと、美しい3層のレイヤーのあるラテマキアートが出来上がります。\n",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -103,7 +107,11 @@ class lattemacchiato extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Checkout()
+                            builder: (context) => Checkout(
+                              product: _product,
+                              number: _number,
+                              menu: _menu,
+                            ),
                         ),
                       );
                     },

@@ -73,7 +73,7 @@ class Checkout extends StatelessWidget {
                       top: 20.0, bottom: 20.0, right: 120.0, left: 120.0
                   ),
                   child: Text(
-                    "オーダー番号　$order_num",
+                    "オーダー番号　  $order_num",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class Checkout extends StatelessWidget {
                       top: 10.0, bottom: 10.0, right: 120.0, left: 120.0
                   ),
                   child: Text(
-                    "・$product  ×  $number    300円 ",
+                    "・$product       ×  $number        $price 円 ",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -149,7 +149,6 @@ class Checkout extends StatelessWidget {
   }
 }
 
-
 //Firebaseにデータを追加する
 class AddInfo extends StatelessWidget {
   final String _menu;
@@ -182,7 +181,8 @@ class AddInfo extends StatelessWidget {
         child: Text(
           "注文確定",
           style: TextStyle(
-            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
             color: Colors.black,
           ),
         ),
