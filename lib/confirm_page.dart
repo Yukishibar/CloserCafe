@@ -1,9 +1,21 @@
 import 'package:closercafe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Confirm extends StatelessWidget {
+  final String order_num;
+  final String product;
+  final int number; //個数
+
+  int price = 300;  //Firestoreテスト用
+
+  Confirm({
+    Key key,
+    this.order_num,
+    this.product,
+    this.number,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +43,7 @@ class Confirm extends StatelessWidget {
               Flexible(
                 child: Container(
                   child: Text(
-                    'ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。',
+                    "ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -40,9 +52,35 @@ class Confirm extends StatelessWidget {
                   ),
                 ),
               ),
-
-              GetProductName("coffee4"),
-
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: 20.0, bottom: 20.0, right: 240.0, left: 240.0
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "ご注文内容\n",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        "注文番号 : $order_num \n"
+                            "$product    ×  $number    $price 円 ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.grey[200],
+              ),
               RaisedButton(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -62,11 +100,6 @@ class Confirm extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 onPressed: () {
-                  Map<String, dynamic> updateData = {
-                    'status': '1',
-                  };
-                  FirebaseFirestore.instance.collection("product")
-                      .doc("coffee4").update(updateData);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -78,69 +111,6 @@ class Confirm extends StatelessWidget {
             ],
           ),
         )
-    );
-  }
-}
-
-
-//Firebase上のデータを取得する
-class GetProductName extends StatelessWidget {
-  final String documentId;
-
-  GetProductName(this.documentId);
-
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference product = FirebaseFirestore.instance.collection('product');
-    return FutureBuilder<DocumentSnapshot>(
-      future: product.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          return Container(
-            margin: const EdgeInsets.all(30.0),
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: 20.0, bottom: 20.0, right: 200.0, left: 200.0
-              ),
-              child: Column(
-                children: <Widget> [
-                  Text(
-                    "ご注文詳細 \n",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    "オーダー番号 : ${data['ordernum']} ",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    "商品名 : 樋口おすすめのコーヒー \n"
-                        "金額 : ${data['price']}円 "
-                        "状態 : ${data['status']}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            color: Colors.grey[200],
-          );
-        }
-        return Text("loading");
-      },
     );
   }
 }

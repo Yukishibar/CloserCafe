@@ -27,6 +27,7 @@ class premiumcoffee extends StatelessWidget {
             "プレミアムコーヒー",
             style: TextStyle(
               color: Colors.black,
+              fontWeight: FontWeight.bold,
               fontSize: 25,
             ),
           ),

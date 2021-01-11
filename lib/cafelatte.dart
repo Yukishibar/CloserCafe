@@ -27,6 +27,7 @@ class cafelatte extends StatelessWidget {
             "カフェラテ",
             style: TextStyle(
               color: Colors.black,
+              fontWeight: FontWeight.bold,
               fontSize: 25,
             ),
           ),
@@ -38,7 +39,8 @@ class cafelatte extends StatelessWidget {
             children: <Widget>[
               Image.asset("images/cafelatte.png"),
               Text(
-                "厳選したコーヒー豆とフレッシュな味わいのミルクを使い、風味豊かに仕上げました。\n"
+                "厳選したコーヒー豆とフレッシュな味わいのミルクを使い、"
+                    "風味豊かに仕上げました。"
                     "深みのあるエスプレッソの香りと豊かなミルクのコク、"
                     "ほどよい甘さがバランスよく引き立てあう贅沢な一杯です。",
                 style: TextStyle(

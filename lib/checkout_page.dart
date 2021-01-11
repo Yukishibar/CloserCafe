@@ -2,6 +2,7 @@ import 'package:closercafe/confirm_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 String order_num = "1";
 //int amount = 0; 合計金額
@@ -111,10 +112,14 @@ class Checkout extends StatelessWidget {
                 ),
               ),
 
-
               AddInfo("$menu","$price","$qr"),
 
-              Flexible(child: Image.asset('images/QR1.jpg')),
+              //QRコード表示
+              QrImage(
+                data: 'https://www.yahoo.co.jp',
+                size: 300,
+              ),
+
               RaisedButton(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -137,7 +142,11 @@ class Checkout extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Confirm()
+                        builder: (context) => Confirm(
+                          order_num: order_num,
+                          product: product,
+                          number: number,
+                        ),
                     ),
                   );
                 },
