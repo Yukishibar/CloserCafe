@@ -1,18 +1,17 @@
-import 'package:closercafe/confirm_page.dart';
+import 'package:closercafe/main.dart';
+import 'package:closercafe/paypay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-String order_num = "1";
+int order_num = 1;
 //int amount = 0; 合計金額
 
-main () {
-  runApp(Checkout());
-}
+void main() => runApp(Checkout());
 
 class Checkout extends StatelessWidget {
-  final String product;
+  final String product; //商品名
   final int number; //個数
   final int menu;
   final String qr = "0";
@@ -25,6 +24,13 @@ class Checkout extends StatelessWidget {
     this.number,
     this.menu,
   }) : super(key: key);
+
+  _saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('product', product);
+    await prefs.setInt('number', number);
+    await prefs.setInt('price', price);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +61,10 @@ class Checkout extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 20.0, bottom: 20.0, right: 300.0, left: 300.0
+                      top: 30.0, bottom: 30.0, right: 270.0, left: 270.0
                   ),
                   child: Text(
-                    "支払い詳細",
+                    "ご注文内容の確認",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -74,7 +80,7 @@ class Checkout extends StatelessWidget {
                       top: 20.0, bottom: 20.0, right: 120.0, left: 120.0
                   ),
                   child: Text(
-                    "オーダー番号　  $order_num",
+                    "お客様のオーダー番号は　$order_num　です。",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -106,6 +112,23 @@ class Checkout extends StatelessWidget {
                     "・$product       ×  $number        $price 円 ",
                     style: TextStyle(
                       fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: 20.0, bottom: 20.0, right: 50.0, left: 50.0
+                  ),
+                  child: Text(
+                    "上記の内容で注文を確定します。「注文確定」ボタンを押すと、支払い画面に切り替わります。\n"
+                        "「注文確定」ボタンを押してもPayPayによるQRコード決済が完了するまでは、商品は調理されません。",
+                    style: TextStyle(
+                      fontSize: 20,
                       color: Colors.black,
                     ),
                   ),
@@ -114,19 +137,14 @@ class Checkout extends StatelessWidget {
 
               AddInfo("$menu","$price","$qr"),
 
-              //QRコード表示
-              QrImage(
-                data: 'https://www.yahoo.co.jp',
-                size: 300,
-              ),
 
               RaisedButton(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
+                      top: 12.0, bottom: 12.0, right: 180.0, left: 180.0
                   ),
                   child: Text(
-                    "次へ",
+                    "キャンセル",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -142,11 +160,7 @@ class Checkout extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Confirm(
-                          order_num: order_num,
-                          product: product,
-                          number: number,
-                        ),
+                        builder: (context) => MyHomePage()
                     ),
                   );
                 },
@@ -158,7 +172,7 @@ class Checkout extends StatelessWidget {
   }
 }
 
-//Firebaseにデータを追加する
+//Firebaseにデータを追加するウィジェット
 class AddInfo extends StatelessWidget {
   final String _menu;
   final String _price;
@@ -177,30 +191,39 @@ class AddInfo extends StatelessWidget {
         "price" : _price,
         "qr" : _qr,
       })
-          .then((value) => print("Order Information Added"))
+          .then((value) => print("Order Information(menu, price, qr) Added"))
           .catchError((error) => print("Failed to add information: $error"));
     }
 
     //データ送信ボタン
     return RaisedButton(
-      child: Padding(
-        padding: EdgeInsets.only(
-            top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
-        ),
-        child: Text(
-          "注文確定",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.black,
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: 12.0, bottom: 12.0, right: 180.0, left: 180.0
+          ),
+          child: Text(
+            "注文確定",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
-      color:Colors.orangeAccent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      onPressed: addInfo,
+        color:Colors.orangeAccent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        onPressed: (){
+          addInfo();
+          order_num++;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => paypay()
+            ),
+          );
+        }
     );
   }
 }

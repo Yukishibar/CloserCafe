@@ -1,20 +1,42 @@
 import 'package:closercafe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() => runApp(Confirm());
 
 class Confirm extends StatelessWidget {
-  final String order_num;
-  final String product;
-  final int number; //個数
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ConfirmPage(
+          title: 'Flutter Demo Home Page'
+      ),
+    );
+  }
+}
 
-  int price = 300;  //Firestoreテスト用
+class ConfirmPage extends StatefulWidget {
+  ConfirmPage({Key key, this.title,}) : super(key: key);
 
-  Confirm({
-    Key key,
-    this.order_num,
-    this.product,
-    this.number,
-  }) : super(key: key);
+  final String title;
+
+  @override
+  _ConfirmPageState createState() => _ConfirmPageState();
+}
+
+class _ConfirmPageState extends State<ConfirmPage> {
+  //int order_num;
+  String product = 'aaa';
+  int number; //個数
+  int price;
+
+  _getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    product = prefs.get('product') ?? 'ドリンク';
+    number = prefs.get('number') ?? 0;
+    price = prefs.get('price') ?? 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +90,7 @@ class Confirm extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "注文番号 : $order_num \n"
+                        //"オーダー番号 : $order_num \n"
                             "$product    ×  $number    $price 円 ",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -112,5 +134,10 @@ class Confirm extends StatelessWidget {
           ),
         )
     );
+  }
+
+  initState() {
+    super.initState();
+    _getData();
   }
 }
