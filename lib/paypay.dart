@@ -5,7 +5,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class paypay extends StatelessWidget {
-  String _qrinfo;
+  //String _qrinfo;
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +65,15 @@ class paypay extends StatelessWidget {
                   ),
                 ),
               ),
-
-              //QRコード表示
-              QrImage(
-                data: 'https://www.yahoo.co.jp',
-                size: 300,
-              ),
-
               StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('product').doc("1").snapshots(),
+                stream: FirebaseFirestore.instance.collection('product').doc('1').snapshots(),
                 builder: (context, snapshot) {
-                  return Text(snapshot.data["qr"]);
+                  return QrImage(
+                    data: snapshot.data["qr"],
+                    size: 300,
+                  );
                 },
               ),
-
               RaisedButton(
                 child: Padding(
                   padding: EdgeInsets.only(
