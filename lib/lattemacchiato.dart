@@ -38,12 +38,15 @@ class lattemacchiato extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset("images/lattemacchiato.png"),
-              Text(
-                "温かくなめらかなミルクの上に、豊かでまろやかなフォームミルクをたっぷりと注ぎ、"
-                    "上からエスプレッソを静かに落とすと、美しい3層のレイヤーのあるラテマキアートが出来上がります。\n",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 25, 30, 25),  //Left, Top, Right, Under
+                child: Text(
+                  "温かくなめらかなミルクの上に、豊かでまろやかなフォームミルクをたっぷりと注ぎ、"
+                      "上からエスプレッソを静かに落とすと、美しい3層のレイヤーのあるラテマキアートが出来上がります。\n",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               Row(

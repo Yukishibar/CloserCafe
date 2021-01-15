@@ -38,14 +38,17 @@ class cafelatte extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset("images/cafelatte.png"),
-              Text(
-                "厳選したコーヒー豆とフレッシュな味わいのミルクを使い、"
-                    "風味豊かに仕上げました。"
-                    "深みのあるエスプレッソの香りと豊かなミルクのコク、"
-                    "ほどよい甘さがバランスよく引き立てあう贅沢な一杯です。",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 25, 30, 25),  //Left, Top, Right, Under
+                child: Text(
+                  "厳選したコーヒー豆とフレッシュな味わいのミルクを使い、"
+                      "風味豊かに仕上げました。"
+                      "深みのあるエスプレッソの香りと豊かなミルクのコク、"
+                      "ほどよい甘さがバランスよく引き立てあう贅沢な一杯です。",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               Row(

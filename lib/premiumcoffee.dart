@@ -38,12 +38,15 @@ class premiumcoffee extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset("images/premiumcoffee.png"),
-              Text(
-                "最上級グレード豆を使用したプレミアムコーヒー。\n"
-                    "マイルドな口あたりが特徴で、どなたにも親しんでいただけるコーヒーです。",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 25, 30, 25),  //Left, Top, Right, Under
+                child: Text(
+                  "最上級グレード豆を使用したプレミアムコーヒー。"
+                      "マイルドな口あたりが特徴で、どなたにも親しんでいただけるコーヒーです。",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               Row(

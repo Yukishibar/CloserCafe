@@ -36,7 +36,7 @@ class CoffeeMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //ドリンクセレクト
-              _drinkSelect(context),
+              //_drinkSelect(context),
               //リストビュー
               Flexible(
                   child: CoffeeSelect()
@@ -277,29 +277,32 @@ class CoffeeSelect extends StatelessWidget {
                             Expanded(
                               child: Column(
                                 children: <Widget>[
-                                  RaisedButton(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 5.0, bottom: 5.0, right: 3.0, left: 3.0
-                                      ),
-                                      child: Text(
-                                        "Order",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                  Container(
+                                    margin: EdgeInsets.all(15),
+                                    child: RaisedButton(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 5.0, bottom: 5.0, right: 3.0, left: 3.0
+                                        ),
+                                        child: Text(
+                                          "Order",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
+                                      color: Colors.orange[400],
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => page[index]
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    color: Colors.orange[400],
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => page[index]
-                                        ),
-                                      );
-                                    },
                                   ),
                                 ],
                               ),

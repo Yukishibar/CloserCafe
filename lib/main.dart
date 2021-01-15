@@ -43,32 +43,35 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset('images/CloserCafe.png'),
-            RaisedButton(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
-                ),
-                child: Text(
-                  "メニューを見る",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+              child: RaisedButton(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
+                  ),
+                  child: Text(
+                    "メニューを見る",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
+                color: Colors.cyan[600],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CoffeeMenu()
+                    ),
+                  );
+                },
               ),
-              color: Colors.cyan[600],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CoffeeMenu()
-                  ),
-                );
-              },
             ),
           ],
         ),

@@ -62,14 +62,17 @@ class _ConfirmPageState extends State<ConfirmPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Flexible(
-                child: Container(
-                  child: Text(
-                    "ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 20, 30),
+                child: Flexible(
+                  child: Container(
+                    child: Text(
+                      "ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
@@ -103,32 +106,35 @@ class _ConfirmPageState extends State<ConfirmPage> {
                 ),
                 color: Colors.grey[200],
               ),
-              RaisedButton(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
-                  ),
-                  child: Text(
-                    "閉じる",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                child: RaisedButton(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 15.0, bottom: 15.0, right: 50.0, left: 50.0
+                    ),
+                    child: Text(
+                      "閉じる",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
+                  color: Colors.cyan[600],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MyHomePage()
+                      ),
+                    );
+                  },
                 ),
-                color: Colors.cyan[600],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MyHomePage()
-                    ),
-                  );
-                },
               ),
             ],
           ),
