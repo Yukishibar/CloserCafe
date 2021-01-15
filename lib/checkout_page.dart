@@ -14,19 +14,20 @@ class Checkout extends StatelessWidget {
   final String product; //商品名
   final int number; //個数
   final int menu;
-  final String qr = "0";
-
-  int price = 300;  //Firestoreテスト用
+  final int price;
+  final String qr = '0';
 
   Checkout({
     Key key,
     this.product,
     this.number,
     this.menu,
+    this.price
   }) : super(key: key);
 
   _saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('order_num', order_num);
     await prefs.setString('product', product);
     await prefs.setInt('number', number);
     await prefs.setInt('price', price);
@@ -145,6 +146,32 @@ class Checkout extends StatelessWidget {
                         top: 12.0, bottom: 12.0, right: 270.0, left: 270.0
                     ),
                     child: Text(
+                      "データ保存",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  color: Colors.cyan[600],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  onPressed: () {
+                    _saveData();
+                  },
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: RaisedButton(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 12.0, bottom: 12.0, right: 270.0, left: 270.0
+                    ),
+                    child: Text(
                       "キャンセル",
                       style: TextStyle(
                         fontSize: 20,
@@ -225,8 +252,8 @@ class AddInfo extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => paypay(
-                    order_num: order_num,
-                  )
+                    order_num: order_num
+                  ),
               ),
             );
           }

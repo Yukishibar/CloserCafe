@@ -11,6 +11,7 @@ class premiumcoffee extends StatelessWidget {
   final String _product = 'プレミアムコーヒー';
   final int  _number = 1;
   final int  _menu = 2;
+  final int _price = 360;
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +113,10 @@ class premiumcoffee extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Checkout(
-                              product: _product,
-                              number: _number,
-                              menu: _menu,
+                                product: _product,
+                                number: _number,
+                                menu: _menu,
+                                price: _price
                             ),
                         ),
                       );

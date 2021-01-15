@@ -17,7 +17,7 @@ class Confirm extends StatelessWidget {
 }
 
 class ConfirmPage extends StatefulWidget {
-  ConfirmPage({Key key, this.title,}) : super(key: key);
+  ConfirmPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -26,13 +26,14 @@ class ConfirmPage extends StatefulWidget {
 }
 
 class _ConfirmPageState extends State<ConfirmPage> {
-  //int order_num;
-  String product = 'aaa';
+  int order_num;
+  String product = '';
   int number; //個数
   int price;
 
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    order_num = prefs.get('order_num') ?? 0;
     product = prefs.get('product') ?? 'ドリンク';
     number = prefs.get('number') ?? 0;
     price = prefs.get('price') ?? 0;
@@ -40,6 +41,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -64,23 +66,22 @@ class _ConfirmPageState extends State<ConfirmPage> {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 20, 30),
-                child: Flexible(
-                  child: Container(
-                    child: Text(
-                      "ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                child: Container(
+                  child: Text(
+                    "ご利用ありがとうございました。\n商品ができるまでもう少しお待ちください。",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
                 ),
               ),
               Container(
+                width: deviceWidth * 0.94,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 20.0, bottom: 20.0, right: 240.0, left: 240.0
+                      top: 30.0, bottom: 30.0, right: 20.0, left: 20.0
                   ),
                   child: Column(
                     children: <Widget>[
@@ -93,7 +94,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                         ),
                       ),
                       Text(
-                        //"オーダー番号 : $order_num \n"
+                        "オーダー番号 : $order_num \n"
                             "$product    ×  $number    $price 円 ",
                         textAlign: TextAlign.center,
                         style: TextStyle(

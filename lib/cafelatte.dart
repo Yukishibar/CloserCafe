@@ -11,6 +11,7 @@ class cafelatte extends StatelessWidget {
   final String _product = 'カフェラテ';
   final int  _number = 1;
   final int  _menu = 1;
+  final int  _price = 300;
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +118,7 @@ class cafelatte extends StatelessWidget {
                               product: _product,
                               number: _number,
                               menu: _menu,
+                              price: _price
                             ),
                         ),
                       );

@@ -74,7 +74,7 @@ class paypay extends StatelessWidget {
                 stream: FirebaseFirestore.instance.collection('product').doc('$order_num').snapshots(),
                 builder: (context, snapshot) {
                   return QrImage(
-                    data: snapshot.data['qr'],
+                    data: 'https://close-r.com', //snapshot.data['qr']
                     size: 300,
                   );
                 },
