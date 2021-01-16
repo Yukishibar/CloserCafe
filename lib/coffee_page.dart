@@ -288,7 +288,10 @@ class CoffeeSelect extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      color: Colors.teal[400],
+                                      color: Colors.teal[300],
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       onPressed: () {
                                         Navigator.push(
                                           context,

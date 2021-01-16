@@ -6,23 +6,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int order_num = 1;
-//int amount = 0; 合計金額
 
 void main() => runApp(Checkout());
 
 class Checkout extends StatelessWidget {
-  final String product; //商品名
-  final int number; //個数
+  final String product;
+  int number;
   final int menu;
-  final int price;
-  final String qr = '0';
+  final String qr = '0';  //QRのURLデータ
+  int total;
 
   Checkout({
     Key key,
     this.product,
     this.number,
     this.menu,
-    this.price
+    this.total
   }) : super(key: key);
 
   _saveData() async {
@@ -30,7 +29,7 @@ class Checkout extends StatelessWidget {
     await prefs.setInt('order_num', order_num);
     await prefs.setString('product', product);
     await prefs.setInt('number', number);
-    await prefs.setInt('price', price);
+    await prefs.setInt('total', total);
   }
 
   @override
@@ -109,12 +108,12 @@ class Checkout extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 10.0, bottom: 10.0, right: 120.0, left: 120.0
+                      top: 20.0, bottom: 20.0, right: 120.0, left: 120.0
                   ),
                   child: Text(
-                    "・$product       ×  $number        $price 円 ",
+                    "・$product       ×  $number        $total 円 ",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 23,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -139,7 +138,7 @@ class Checkout extends StatelessWidget {
                 ),
               ),
 
-              AddInfo("$menu","$price","$qr"),
+              AddInfo("$menu","$total","$qr"),
 
               Container(
                 width: deviceWidth * 0.85,
@@ -209,10 +208,10 @@ class Checkout extends StatelessWidget {
 //Firebaseにデータを追加するウィジェット
 class AddInfo extends StatelessWidget {
   final String _menu;
-  final String _price;
+  final String _total;
   final String _qr;
 
-  AddInfo(this._menu, this._price, this._qr);
+  AddInfo(this._menu, this._total, this._qr);
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +222,7 @@ class AddInfo extends StatelessWidget {
     Future<void> addInfo() async{
       return await product.doc("$order_num").set({
         "menu" : _menu,
-        "price" : _price,
+        "price" : _total,
         "qr" : _qr,
       })
           .then((value) => print("Order Information(menu, price, qr) Added"))
@@ -248,7 +247,7 @@ class AddInfo extends StatelessWidget {
               ),
             ),
           ),
-          color: Colors.teal[400],
+          color: Colors.teal[300],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),

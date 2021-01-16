@@ -8,9 +8,7 @@ void main() => runApp(Confirm());
 class Confirm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ConfirmPage()
-    );
+    return ConfirmPage();
   }
 }
 
@@ -25,7 +23,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
     order_num = prefs.get('order_num') ?? 0;
     product = prefs.get('product') ?? 'ドリンク';
     number = prefs.get('number') ?? 0;
-    price = prefs.get('price') ?? 0;
+    total = prefs.get('total') ?? 0;
   }
 
   @override
@@ -37,7 +35,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
   int order_num;
   String product = 'ドリンク';
   int number = 1; //個数
-  int price = 0;
+  int total = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +92,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       ),
                       Text(
                         "オーダー番号 : $order_num \n"
-                            "$product    ×  $number    $price 円",
+                            "$product    ×  $number    $total 円",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25,
@@ -123,7 +121,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       ),
                     ),
                   ),
-                  color: Colors.teal[400],
+                  color: Colors.teal[300],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

@@ -9,7 +9,7 @@ void main() {
 
 class lattemacchiato extends StatelessWidget {
   final String _product = 'ラテマキアート';
-  final int  _number = 1;
+  int  _number = 1;
   final int  _menu = 3;
   final int _price = 320;
 
@@ -116,7 +116,6 @@ class lattemacchiato extends StatelessWidget {
                                 product: _product,
                                 number: _number,
                                 menu: _menu,
-                                price: _price
                             ),
                         ),
                       );

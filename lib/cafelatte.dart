@@ -10,25 +10,21 @@ void main() {
 class cafelatte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: cafelattePage(title: "cafelatte")
-    );
+    return cafelattePage();
   }
 }
 
 class cafelattePage extends StatefulWidget {
-  cafelattePage({Key key, this.title}) : super(key: key);
-
-  final String title;
   @override
   _cafelattePageState createState() => _cafelattePageState();
 }
 
 class _cafelattePageState extends State<cafelattePage> {
-  final String _product = 'カフェラテ';
-  int  _number = 1;
-  final int  _menu = 1;
-  final int  _price = 300;
+  final String _product = 'カフェラテ';  //商品名
+  int _number = 1; //個数
+  final int _menu = 1; //カフェラテ:1, プレミアムコーヒー:2, ラテマキアート:3
+  final int _price = 300;  //単価
+  int _total = 0; //合計金額
 
   void _incrementCounter() {
     setState(() {
@@ -42,16 +38,25 @@ class _cafelattePageState extends State<cafelattePage> {
     });
   }
 
+  void _totalCal() {
+    _total = _price * _number;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           brightness: Brightness.light,
-          centerTitle: true ,
-          //戻るボタンの色の変更
-          iconTheme: IconThemeData(
-            color: Colors.black,
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+              onPressed: () {
+                Navigator.pop(context);
+              }
           ),
           title: Text(
             "カフェラテ",
@@ -107,7 +112,7 @@ class _cafelattePageState extends State<cafelattePage> {
                                     child: FloatingActionButton(
                                       heroTag: "hero1",
                                       onPressed: _incrementCounter,
-                                      backgroundColor: Colors.teal[400],
+                                      backgroundColor: Colors.teal[300],
                                       child: Icon(
                                         Icons.add,
                                         size: 30,
@@ -130,7 +135,7 @@ class _cafelattePageState extends State<cafelattePage> {
                                     child: FloatingActionButton(
                                       heroTag: "hero2",
                                       onPressed: _decrementCounter,
-                                      backgroundColor: Colors.teal[400],
+                                      backgroundColor: Colors.teal[300],
                                       child: Icon(
                                         Icons.remove,
                                         size: 30,
@@ -142,8 +147,6 @@ class _cafelattePageState extends State<cafelattePage> {
                       ],
                     ),
                   ),
-
-                  //お会計ボタン
                   RaisedButton(
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -158,11 +161,12 @@ class _cafelattePageState extends State<cafelattePage> {
                         ),
                       ),
                     ),
-                    color: Colors.teal[400],
+                    color: Colors.teal[300],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     onPressed: () {
+                      _totalCal();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -170,7 +174,7 @@ class _cafelattePageState extends State<cafelattePage> {
                               product: _product,
                               number: _number,
                               menu: _menu,
-                              price: _price
+                              total: _total
                             ),
                         ),
                       );
