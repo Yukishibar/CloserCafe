@@ -11,16 +11,18 @@ void main() => runApp(Checkout());
 
 class Checkout extends StatelessWidget {
   final String product;
-  int number;
   final int menu;
   final String qr = '0';  //QRのURLデータ
+  int number;
   int total;
+
+  final timenow = DateTime.now();
 
   Checkout({
     Key key,
     this.product,
-    this.number,
     this.menu,
+    this.number,
     this.total
   }) : super(key: key);
 
@@ -94,12 +96,12 @@ class Checkout extends StatelessWidget {
               Container(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 20.0, bottom: 20.0, right: 120.0, left: 120.0
+                      top: 20.0, bottom: 5.0, right: 120.0, left: 120.0
                   ),
                   child: Text(
-                    "ご注文日時 : 2020/10/24 17:26",
+                    "ご注文日時  :  $timenow",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                       color: Colors.black,
                     ),
                   ),

@@ -21,9 +21,9 @@ class cafelattePage extends StatefulWidget {
 
 class _cafelattePageState extends State<cafelattePage> {
   final String _product = 'カフェラテ';  //商品名
-  int _number = 1; //個数
   final int _menu = 1; //カフェラテ:1, プレミアムコーヒー:2, ラテマキアート:3
   final int _price = 300;  //単価
+  int _number = 1; //個数
   int _total = 0; //合計金額
 
   void _incrementCounter() {

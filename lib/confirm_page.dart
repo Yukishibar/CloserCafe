@@ -23,6 +23,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
   int number = 1; //個数
   int total = 0;
 
+  final timenow = DateTime.now();
+
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     order_num = prefs.get('order_num') ?? 0;
@@ -83,11 +85,23 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "ご注文内容\n",
+                        "ご注文内容",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 15.0, bottom: 35.0),
+                          child: Text(
+                            "ご注文日時  :  $timenow",
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
                       ),
                       Text(
