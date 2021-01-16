@@ -35,6 +35,7 @@ class Checkout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -60,6 +61,7 @@ class Checkout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
+                width: deviceWidth * 0.94,
                 child: Padding(
                   padding: EdgeInsets.only(
                       top: 30.0, bottom: 30.0, right: 270.0, left: 270.0
@@ -121,6 +123,7 @@ class Checkout extends StatelessWidget {
               ),
 
               Container(
+                width: deviceWidth * 0.94,
                 child: Padding(
                   padding: EdgeInsets.only(
                       top: 20.0, bottom: 20.0, right: 40.0, left: 40.0
@@ -139,6 +142,7 @@ class Checkout extends StatelessWidget {
               AddInfo("$menu","$price","$qr"),
 
               Container(
+                width: deviceWidth * 0.85,
                 margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: RaisedButton(
                   child: Padding(
@@ -150,13 +154,13 @@ class Checkout extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                  color: Colors.cyan[600],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   onPressed: () {
                     _saveData();
@@ -165,6 +169,7 @@ class Checkout extends StatelessWidget {
               ),
 
               Container(
+                width: deviceWidth * 0.85,
                 margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: RaisedButton(
                   child: Padding(
@@ -176,13 +181,13 @@ class Checkout extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                  color: Colors.cyan[600],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -211,6 +216,7 @@ class AddInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference product = firestore.collection("product");
 
@@ -226,6 +232,7 @@ class AddInfo extends StatelessWidget {
 
     //データ送信ボタン
     return Container(
+      width: deviceWidth * 0.85,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: RaisedButton(
           child: Padding(
@@ -237,11 +244,11 @@ class AddInfo extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ),
-          color:Colors.orangeAccent,
+          color: Colors.teal[400],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -251,9 +258,9 @@ class AddInfo extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => paypay(
+                builder: (context) => paypay(
                     order_num: order_num
-                  ),
+                ),
               ),
             );
           }

@@ -104,7 +104,7 @@ class premiumcoffee extends StatelessWidget {
                         ),
                       ),
                     ),
-                    color: Colors.cyan[600],
+                    color: Colors.teal[400],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),

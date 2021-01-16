@@ -9,28 +9,17 @@ class Confirm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ConfirmPage(
-          title: 'Flutter Demo Home Page'
-      ),
+      home: ConfirmPage()
     );
   }
 }
 
 class ConfirmPage extends StatefulWidget {
-  ConfirmPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _ConfirmPageState createState() => _ConfirmPageState();
 }
 
 class _ConfirmPageState extends State<ConfirmPage> {
-  int order_num;
-  String product = '';
-  int number; //個数
-  int price;
-
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     order_num = prefs.get('order_num') ?? 0;
@@ -38,6 +27,17 @@ class _ConfirmPageState extends State<ConfirmPage> {
     number = prefs.get('number') ?? 0;
     price = prefs.get('price') ?? 0;
   }
+
+  @override
+  initState() {
+    super.initState();
+    _getData();
+  }
+
+  int order_num;
+  String product = 'ドリンク';
+  int number = 1; //個数
+  int price = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,6 @@ class _ConfirmPageState extends State<ConfirmPage> {
           ),
         ),
         body: Center(
-          //margin: const EdgeInsets.all(30.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -95,7 +94,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       ),
                       Text(
                         "オーダー番号 : $order_num \n"
-                            "$product    ×  $number    $price 円 ",
+                            "$product    ×  $number    $price 円",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25,
@@ -108,6 +107,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                 color: Colors.grey[200],
               ),
               Container(
+                width: deviceWidth * 0.45,
                 margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 child: RaisedButton(
                   child: Padding(
@@ -117,13 +117,13 @@ class _ConfirmPageState extends State<ConfirmPage> {
                     child: Text(
                       "閉じる",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  color: Colors.cyan[600],
+                  color: Colors.teal[400],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -141,10 +141,5 @@ class _ConfirmPageState extends State<ConfirmPage> {
           ),
         )
     );
-  }
-
-  initState() {
-    super.initState();
-    _getData();
   }
 }

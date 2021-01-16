@@ -14,6 +14,7 @@ class paypay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -70,16 +71,20 @@ class paypay extends StatelessWidget {
                   ),
                 ),
               ),
-              StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('product').doc('$order_num').snapshots(),
-                builder: (context, snapshot) {
-                  return QrImage(
-                    data: 'https://close-r.com', //snapshot.data['qr']
-                    size: 300,
-                  );
-                },
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 50, 0, 50),  //left, top, right, down
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection('product').doc('$order_num').snapshots(),
+                  builder: (context, snapshot) {
+                    return QrImage(
+                      data: 'https://close-r.com', //snapshot.data['qr']
+                      size: 350,
+                    );
+                  },
+                ),
               ),
               Container(
+                width: deviceWidth * 0.45,
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: RaisedButton(
                   child: Padding(
@@ -89,13 +94,13 @@ class paypay extends StatelessWidget {
                     child: Text(
                       "次へ",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  color: Colors.cyan[600],
+                  color: Colors.teal[400],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

@@ -30,9 +30,7 @@ class CoffeeMenu extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        margin: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-        child: Column(
+      body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //ドリンクセレクト
@@ -42,20 +40,19 @@ class CoffeeMenu extends StatelessWidget {
                   child: CoffeeSelect()
               ),
               //フッター表示
-              _fotter(context),
+              //_fotter(context),
             ]
         ),
-      ),
-    );
+      );
   }
 
   //コーヒー，レモネード，カスタム選択画面
   Widget _drinkSelect(BuildContext context){
     return Container(
+      margin: const EdgeInsets.fromLTRB(20, 30, 20, 15),
       decoration: BoxDecoration(
         //黒フチで囲うかどうか
         border: Border.all(color: Colors.black38),
-        //color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -215,11 +212,12 @@ class CoffeeSelect extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        margin: const EdgeInsets.fromLTRB(20, 25, 20, 25),
         child: GridView.count(
           crossAxisCount: 2,  //横方向に並べる数
-          crossAxisSpacing: 15.0, // 縦
-          mainAxisSpacing: 10.0, // 横
-          childAspectRatio: 0.8, // 高さ
+          crossAxisSpacing: 20.0, // 縦
+          mainAxisSpacing: 20,  //各リストの縦
+          childAspectRatio: 0.8, //各リストの高さ
 
           //グリッドのリストに表示させる情報
           children: List.generate(3, (index) {
@@ -227,18 +225,16 @@ class CoffeeSelect extends StatelessWidget {
                 alignment: Alignment.center,
                 //ボックスの装飾
                 decoration: BoxDecoration(
-                  //黒フチで囲うどうか
-                  //border: Border.all(color: Colors.black26),
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 //画面内の余白設定
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
                 child: Column(
                   children: <Widget>[
                     ClipRRect(
                       //グリッドの画像の角を丸く表示
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                       child: imageList[index],
                     ),
                     Flexible(
@@ -249,7 +245,7 @@ class CoffeeSelect extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
-                                    margin: const EdgeInsets.only(top: 15.0),
+                                    margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
                                     //商品名のテキスト編集
                                     child: Text(
                                       name[index],
@@ -261,11 +257,12 @@ class CoffeeSelect extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
+                                    margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
                                     //価格のテキスト編集
                                     child: Text(
                                       price[index],
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 25,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -278,22 +275,20 @@ class CoffeeSelect extends StatelessWidget {
                               child: Column(
                                 children: <Widget>[
                                   Container(
-                                    margin: EdgeInsets.all(15),
+                                    margin: EdgeInsets.fromLTRB(75, 18, 0, 0),
                                     child: RaisedButton(
                                       child: Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 5.0, bottom: 5.0, right: 3.0, left: 3.0
-                                        ),
+                                        padding: EdgeInsets.fromLTRB(3, 10, 3, 10),
                                         child: Text(
-                                          "Order",
+                                          "注文",
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
-                                      color: Colors.orange[400],
+                                      color: Colors.teal[400],
                                       onPressed: () {
                                         Navigator.push(
                                           context,

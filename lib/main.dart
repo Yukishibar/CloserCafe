@@ -17,18 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(
-          title: 'Flutter Demo Home Page'
-      ),
+      home: MyHomePage()
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title,}) : super(key: key);
-
-  final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -36,6 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(30.0),
@@ -44,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Image.asset('images/CloserCafe.png'),
             Container(
+              width: deviceWidth * 0.45,
               margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
               child: RaisedButton(
                 child: Padding(
@@ -53,13 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     "メニューを見る",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                 ),
-                color: Colors.cyan[600],
+                color: Colors.teal[400],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
