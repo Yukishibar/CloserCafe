@@ -28,13 +28,17 @@ class _cafelattePageState extends State<cafelattePage> {
 
   void _incrementCounter() {
     setState(() {
-      _number++;
+      if (_number < 5) {
+        _number++;
+      }
     });
   }
 
   void _decrementCounter() {
     setState(() {
-      _number--;
+      if (_number > 1) {
+        _number--;
+      }
     });
   }
 
@@ -51,7 +55,7 @@ class _cafelattePageState extends State<cafelattePage> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_ios,
               color: Colors.black,
             ),
               onPressed: () {
@@ -59,7 +63,7 @@ class _cafelattePageState extends State<cafelattePage> {
               }
           ),
           title: Text(
-            "カフェラテ",
+            "$_product",
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -72,7 +76,13 @@ class _cafelattePageState extends State<cafelattePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset("images/cafelatte.png"),
+              ClipRRect(
+                //グリッドの画像の角を丸く表示
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  "images/cafelatte.png",
+                ),
+              ),
               Container(
                 margin: EdgeInsets.fromLTRB(15, 50, 15, 40),  //Left, Top, Right, Under
                 child: Text(
@@ -98,7 +108,7 @@ class _cafelattePageState extends State<cafelattePage> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(0, 5, 100, 0),
                                   child: Text(
-                                    "300円",
+                                    "$_price 円",
                                     style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.black,
@@ -108,9 +118,10 @@ class _cafelattePageState extends State<cafelattePage> {
                                 ),
                                 Container(
                                     width: 45,
-                                    margin: EdgeInsets.only(left: 80, right: 10),
+                                    margin: EdgeInsets.only(left: 100, right: 10),
                                     child: FloatingActionButton(
                                       heroTag: "hero1",
+                                      elevation: 0,
                                       onPressed: _incrementCounter,
                                       backgroundColor: Colors.teal[300],
                                       child: Icon(
@@ -134,6 +145,7 @@ class _cafelattePageState extends State<cafelattePage> {
                                   margin: EdgeInsets.only(left: 20, right: 10),
                                     child: FloatingActionButton(
                                       heroTag: "hero2",
+                                      elevation: 0,
                                       onPressed: _decrementCounter,
                                       backgroundColor: Colors.teal[300],
                                       child: Icon(

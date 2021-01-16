@@ -18,6 +18,11 @@ class ConfirmPage extends StatefulWidget {
 }
 
 class _ConfirmPageState extends State<ConfirmPage> {
+  int order_num;
+  String product = 'ドリンク';
+  int number = 1; //個数
+  int total = 0;
+
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     order_num = prefs.get('order_num') ?? 0;
@@ -31,11 +36,6 @@ class _ConfirmPageState extends State<ConfirmPage> {
     super.initState();
     _getData();
   }
-
-  int order_num;
-  String product = 'ドリンク';
-  int number = 1; //個数
-  int total = 0;
 
   @override
   Widget build(BuildContext context) {
