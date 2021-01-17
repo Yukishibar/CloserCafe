@@ -4,22 +4,22 @@ import 'package:flutter/cupertino.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(lattemacchiato());
+  runApp(Lattemacchiato());
 }
 
-class lattemacchiato extends StatelessWidget {
+class Lattemacchiato extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return lattemacchiatoPage();
+    return LattemacchiatoPage();
   }
 }
 
-class lattemacchiatoPage extends StatefulWidget {
+class LattemacchiatoPage extends StatefulWidget {
   @override
-  _lattemacchiatoPageState createState() => _lattemacchiatoPageState();
+  _LattemacchiatoPageState createState() => _LattemacchiatoPageState();
 }
 
-class _lattemacchiatoPageState extends State<lattemacchiatoPage> {
+class _LattemacchiatoPageState extends State<LattemacchiatoPage> {
   final String _product = 'ラテマキアート';  //商品名
   final int _menu = 3; //カフェラテ:1, プレミアムコーヒー:2, ラテマキアート:3
   final int _price = 320;  //単価

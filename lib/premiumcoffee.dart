@@ -4,22 +4,22 @@ import 'package:flutter/cupertino.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(premiumcoffee());
+  runApp(Premiumcoffee());
 }
 
-class premiumcoffee extends StatelessWidget {
+class Premiumcoffee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return premiumcoffeePage();
+    return PremiumcoffeePage();
   }
 }
 
-class premiumcoffeePage extends StatefulWidget {
+class PremiumcoffeePage extends StatefulWidget {
   @override
-  _premiumcoffeePageState createState() => _premiumcoffeePageState();
+  _PremiumcoffeePageState createState() => _PremiumcoffeePageState();
 }
 
-class _premiumcoffeePageState extends State<premiumcoffeePage> {
+class _PremiumcoffeePageState extends State<PremiumcoffeePage> {
   final String _product = 'プレミアムコーヒー';  //商品名
   final int _menu = 2; //カフェラテ:1, プレミアムコーヒー:2, ラテマキアート:3
   final int _price = 360;  //単価

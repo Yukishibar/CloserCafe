@@ -1,9 +1,8 @@
-import 'package:closercafe/confirm_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:closercafe/checkout_page.dart';
 
 void main() => runApp(PayPay());
 
@@ -20,24 +19,6 @@ class PayPayPage extends StatefulWidget {
 }
 
 class _PayPayPageState extends State<PayPayPage> {
-  int order_num;
-
-  Future<void> _getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    order_num = prefs.get('order_num') ?? 0;
-  }
-
-  SharedPreferences sharedPrefs;
-
-  @override
-  initState() {
-    super.initState();
-    _getData();
-    SharedPreferences.getInstance().then((prefs) {
-      setState(() => sharedPrefs = prefs);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = MediaQuery.of(context).size.width;
@@ -100,12 +81,14 @@ class _PayPayPageState extends State<PayPayPage> {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 50),  //left, top, right, down
                 child: StreamBuilder(
-                  stream: FirebaseFirestore.instance.collection('product').doc('$order_num').snapshots(),
+                  stream: FirebaseFirestore.instance.collection('product').doc('$orderNum').snapshots(),
                   builder: (context, snapshot) {
-                    return QrImage(
-                      data: snapshot.data['qr'], //https://close-r.com
-                      size: 350,
-                    );
+                    if (snapshot.hasData) {
+                      return QrImage(
+                        data: snapshot.data['qr'],
+                        size: 350,
+                      );
+                    } return CircularProgressIndicator();
                   },
                 ),
               ),
@@ -130,14 +113,7 @@ class _PayPayPageState extends State<PayPayPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Confirm()
-                      ),
-                    );
-                  },
+                  onPressed: () => Navigator.of(context).pushReplacementNamed("/confirm"),
                 ),
               ),
             ],

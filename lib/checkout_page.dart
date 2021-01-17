@@ -1,18 +1,16 @@
-import 'package:closercafe/main.dart';
-import 'package:closercafe/paypay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-int order_num = 1;
+int orderNum = 1;
 
 void main() => runApp(CheckoutPage());
 
 class CheckoutPage extends StatelessWidget {
   final String product;
   final int menu;
-  final String qr = 'https://close-r.com';  //QRのURLデータ 本来は'0'
+  final String qr = '0';
   int number;
   int total;
 
@@ -68,7 +66,7 @@ class CheckoutPage extends StatelessWidget {
                       top: 20.0, bottom: 20.0, right: 120.0, left: 120.0
                   ),
                   child: Text(
-                    "お客様のオーダー番号は　$order_num　です。",
+                    "お客様のオーダー番号は　$orderNum　です。",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -134,14 +132,7 @@ class CheckoutPage extends StatelessWidget {
                   shape: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MyHomePage()
-                      ),
-                    );
-                  },
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false),
                 ),
               ),
             ],
@@ -164,7 +155,6 @@ class AddInfo extends StatelessWidget {
 
   _saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('order_num', order_num);
     await prefs.setString('product', _product);
     await prefs.setInt('number', _number);
     await prefs.setInt('total', _total);
@@ -177,7 +167,7 @@ class AddInfo extends StatelessWidget {
     CollectionReference product = firestore.collection("product");
 
     Future<void> addInfo() async{
-      return await product.doc("$order_num").set({
+      return await product.doc("$orderNum").set({
         "menu" : _menu,
         "total" : _total,
         "qr" : _qr,
@@ -211,13 +201,7 @@ class AddInfo extends StatelessWidget {
           onPressed: (){
             _saveData();
             addInfo();
-            //order_num++;
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PayPay()
-              ),
-            );
+            Navigator.pushNamedAndRemoveUntil(context, "/paypay", (_) => false);
           }
       ),
     );

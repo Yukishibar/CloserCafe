@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:closercafe/logo.dart';
 import 'package:closercafe/cafelatte.dart';
 import 'package:closercafe/premiumcoffee.dart';
 import 'package:closercafe/lattemacchiato.dart';
+//'package:closercafe/logo.dart';
 
 class CoffeeMenu extends StatelessWidget {
   @override
@@ -60,7 +60,7 @@ class CoffeeSelect extends StatelessWidget {
 
     //各注文ページへの遷移
     var page = [
-      cafelatte(), premiumcoffee(), lattemacchiato(),
+      Cafelatte(), Premiumcoffee(), Lattemacchiato(),
     ];
 
     return Scaffold(

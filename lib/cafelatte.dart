@@ -4,22 +4,22 @@ import 'package:flutter/cupertino.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(cafelatte());
+  runApp(Cafelatte());
 }
 
-class cafelatte extends StatelessWidget {
+class Cafelatte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return cafelattePage();
+    return CafelattePage();
   }
 }
 
-class cafelattePage extends StatefulWidget {
+class CafelattePage extends StatefulWidget {
   @override
-  _cafelattePageState createState() => _cafelattePageState();
+  _CafelattePageState createState() => _CafelattePageState();
 }
 
-class _cafelattePageState extends State<cafelattePage> {
+class _CafelattePageState extends State<CafelattePage> {
   final String _product = 'カフェラテ';  //商品名
   final int _menu = 1; //カフェラテ:1, プレミアムコーヒー:2, ラテマキアート:3
   final int _price = 300;  //単価

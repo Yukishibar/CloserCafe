@@ -1,8 +1,10 @@
-import 'package:closercafe/coffee_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:closercafe/coffee_page.dart';
+import 'package:closercafe/paypay.dart';
+import 'package:closercafe/confirm_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage()
+      home: MyHomePage(),
+      routes: <String, WidgetBuilder> {
+        '/home': (BuildContext context) => MyHomePage(),
+        '/paypay': (BuildContext context) => PayPay(),
+        '/confirm': (BuildContext context) => Confirm()
+      },
     );
   }
 }

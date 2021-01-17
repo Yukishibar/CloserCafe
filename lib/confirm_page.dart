@@ -1,7 +1,7 @@
-import 'package:closercafe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:closercafe/checkout_page.dart';
 
 void main() => runApp(Confirm());
 
@@ -18,7 +18,6 @@ class ConfirmPage extends StatefulWidget {
 }
 
 class _ConfirmPageState extends State<ConfirmPage> {
-  int order_num;
   String product = 'ドリンク';
   int number = 1; //個数
   int total = 0;
@@ -27,7 +26,6 @@ class _ConfirmPageState extends State<ConfirmPage> {
 
   Future<void> _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    order_num = prefs.get('order_num') ?? 0;
     product = prefs.get('product') ?? 'ドリンク';
     number = prefs.get('number') ?? 0;
     total = prefs.get('total') ?? 0;
@@ -110,7 +108,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                         ),
                       ),
                       Text(
-                        "オーダー番号    $order_num \n"
+                        "オーダー番号    $orderNum \n"
                             "$product    ×    $number        $total 円",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -145,13 +143,9 @@ class _ConfirmPageState extends State<ConfirmPage> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MyHomePage()
-                      ),
-                    );
-                  },
+                    orderNum++;
+                    Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
+                  }
                 ),
               ),
             ],
