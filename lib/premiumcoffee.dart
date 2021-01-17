@@ -180,7 +180,7 @@ class _premiumcoffeePageState extends State<premiumcoffeePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Checkout(
+                        builder: (context) => CheckoutPage(
                             product: _product,
                             number: _number,
                             menu: _menu,

@@ -7,10 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class paypay extends StatelessWidget {
   int order_num;
 
-  paypay({
-    Key key,
-    this.order_num,
-  }) : super(key: key);
+  paypay({Key key, this.order_num}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

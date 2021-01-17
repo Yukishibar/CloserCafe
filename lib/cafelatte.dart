@@ -182,7 +182,7 @@ class _cafelattePageState extends State<cafelattePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Checkout(
+                            builder: (context) => CheckoutPage(
                               product: _product,
                               number: _number,
                               menu: _menu,

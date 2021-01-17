@@ -180,7 +180,7 @@ class _lattemacchiatoPageState extends State<lattemacchiatoPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Checkout(
+                        builder: (context) => CheckoutPage(
                             product: _product,
                             number: _number,
                             menu: _menu,

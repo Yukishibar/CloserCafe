@@ -23,9 +23,9 @@ class _ConfirmPageState extends State<ConfirmPage> {
   int number = 1; //個数
   int total = 0;
 
-  final timenow = DateTime.now();
+  final ordertime = DateTime.now();
 
-  _getData() async {
+  Future<void> _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     order_num = prefs.get('order_num') ?? 0;
     product = prefs.get('product') ?? 'ドリンク';
@@ -33,10 +33,15 @@ class _ConfirmPageState extends State<ConfirmPage> {
     total = prefs.get('total') ?? 0;
   }
 
+  SharedPreferences sharedPrefs;
+
   @override
   initState() {
     super.initState();
     _getData();
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() => sharedPrefs = prefs);
+    });
   }
 
   @override
@@ -96,7 +101,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                         child: Padding(
                           padding: EdgeInsets.only(top: 15.0, bottom: 35.0),
                           child: Text(
-                            "ご注文日時  :  $timenow",
+                            "ご注文日時  :  $ordertime",
                             style: TextStyle(
                               fontSize: 22,
                               color: Colors.black,
@@ -105,8 +110,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
                         ),
                       ),
                       Text(
-                        "オーダー番号 : $order_num \n"
-                            "$product    ×  $number    $total 円",
+                        "オーダー番号    $order_num \n"
+                            "$product    ×    $number        $total 円",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25,
