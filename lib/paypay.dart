@@ -93,6 +93,30 @@ class _PayPayPageState extends State<PayPayPage> {
                 ),
               ),
               Container(
+                width: deviceWidth * 0.85,
+                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),  //left, top, right, down
+                child: RaisedButton(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 12.0, bottom: 12.0, right: 270.0, left: 270.0
+                    ),
+                    child: Text(
+                      "キャンセル",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  color: Colors.white,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false),
+                ),
+              ),
+              Container(
                 width: deviceWidth * 0.45,
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: RaisedButton(

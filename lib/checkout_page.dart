@@ -99,8 +99,9 @@ class CheckoutPage extends StatelessWidget {
                       top: 20.0, bottom: 20.0, right: 40.0, left: 40.0
                   ),
                   child: Text(
-                    "上記の内容で注文を確定します。「注文確定」ボタンを押すと、支払い画面に切り替わります。\n"
-                        "「注文確定」ボタンを押してもPayPayによるQRコード決済が完了するまでは、商品は調理されません。",
+                    "上記の内容でよろしければ「注文確定」ボタンを押してください。\n"
+                        "「注文確定」ボタンを押すと、PayPayでのQRコード決済画面に切り替わります。"
+                        "「注文確定」ボタンを押しても決済が完了するまでは、商品は調理されません。",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -141,7 +142,6 @@ class CheckoutPage extends StatelessWidget {
     );
   }
 }
-
 
 //Firebaseにデータを追加するウィジェット
 class AddInfo extends StatelessWidget {
