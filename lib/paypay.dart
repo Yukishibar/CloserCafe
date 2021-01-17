@@ -117,7 +117,7 @@ class _PayPayPageState extends State<PayPayPage> {
                 ),
               ),
               Container(
-                width: deviceWidth * 0.45,
+                width: deviceWidth * 0.85,
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: RaisedButton(
                   child: Padding(
@@ -127,7 +127,7 @@ class _PayPayPageState extends State<PayPayPage> {
                     child: Text(
                       "次へ",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 23,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
