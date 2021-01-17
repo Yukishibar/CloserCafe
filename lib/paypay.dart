@@ -3,11 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class paypay extends StatelessWidget {
+void main() => runApp(PayPay());
+
+class PayPay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PayPayPage();
+  }
+}
+
+class PayPayPage extends StatefulWidget {
+  @override
+  _PayPayPageState createState() => _PayPayPageState();
+}
+
+class _PayPayPageState extends State<PayPayPage> {
   int order_num;
 
-  paypay({Key key, this.order_num}) : super(key: key);
+  Future<void> _getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    order_num = prefs.get('order_num') ?? 0;
+  }
+
+  SharedPreferences sharedPrefs;
+
+  @override
+  initState() {
+    super.initState();
+    _getData();
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() => sharedPrefs = prefs);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +103,7 @@ class paypay extends StatelessWidget {
                   stream: FirebaseFirestore.instance.collection('product').doc('$order_num').snapshots(),
                   builder: (context, snapshot) {
                     return QrImage(
-                      data: 'https://close-r.com', //snapshot.data['qr']
+                      data: snapshot.data['qr'], //https://close-r.com
                       size: 350,
                     );
                   },

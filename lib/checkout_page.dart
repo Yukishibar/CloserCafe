@@ -12,7 +12,7 @@ void main() => runApp(CheckoutPage());
 class CheckoutPage extends StatelessWidget {
   final String product;
   final int menu;
-  final String qr = '0';  //QRのURLデータ
+  final String qr = 'https://close-r.com';  //QRのURLデータ 本来は'0'
   int number;
   int total;
 
@@ -211,13 +211,11 @@ class AddInfo extends StatelessWidget {
           onPressed: (){
             _saveData();
             addInfo();
-            order_num++;
+            //order_num++;
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => paypay(
-                    order_num: order_num
-                ),
+                builder: (context) => PayPay()
               ),
             );
           }
